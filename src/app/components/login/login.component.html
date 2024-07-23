@@ -1,0 +1,12 @@
+<div class="login-card">
+
+  <div class="card-title">
+    <h1>Openrouter Login</h1>
+  </div>
+  <form class="form-group" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <input name="username" required type="text" formControlName="username" placeholder="Username">
+    <input type="password" required formControlName="password" placeholder="Password">
+    <button>Login</button>
+  </form>
+
+</div>

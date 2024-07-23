@@ -1,0 +1,144 @@
+<app-navbar></app-navbar>
+<section class="settingssection">
+  <!-- telnet settings -->
+  <div class="settingrect ">
+    <div class="settingrectheader">
+      <h2>Telnet</h2>
+      <div class="checkbox-wrapper-2">
+        <input [checked]="telnetenabled" type="checkbox" class="sc-gJwTLC ikxBAC" id="telnetenable" (click)="toggletelnetbody()">
+      </div>
+    </div>
+    <div class="settingrectbody telnetsettingbody" *ngIf="activeTelnetBody">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <label for="telnetportinput" class="forminputlabel">Port</label>
+        <input type="text" id="telnetportinput" class="forminput" [value]="telnetport">
+      </div>
+    </div>
+    <div class="settingrectfooter">
+      <!-- <button class="settingrectfooterbutton hiddenbutton" id="add_telnet_user_button">Add telnet user</button> -->
+      <button class="settingrectfooterbutton" id="set_telnet_settings">Confirm</button>
+    </div>
+  </div>
+  <!-- telnet settings -->
+  <!-- DNS settings -->
+  <div class="settingrect ">
+    <div class="settingrectheader">
+      <h2>DNS</h2>
+      <div class="checkbox-wrapper-2">
+        <input type="checkbox" class="sc-gJwTLC ikxBAC" id="dnsenable" (click)="togglednsbody()">
+      </div>
+    </div>
+    <div class="settingrectbody" id="dnssettingsbody" *ngIf="activeDnsBody">
+      <table class="dnsservers">
+        <thead>
+        <tr><th>DNS servers</th></tr>
+        </thead>
+        <tbody id="dnsserverstablebody">
+        </tbody>
+      </table>
+      <h3>Domains Table</h3>
+      <table class="domains">
+        <thead>
+        <tr>
+          <th class="three">IP</th>
+          <th class="three">Domain</th>
+          <!-- <th class="three">Del</th> -->
+        </tr>
+        </thead>
+        <tbody id="domainsstablebody">
+        </tbody>
+      </table>
+    </div>
+    <div class="settingrectfooter">
+      <button *ngIf="activeDnsBody" id="add_local_domain_button" class="hiddenbutton settingrectfooterbutton">Add Local Domain</button>
+      <button *ngIf="activeDnsBody" id="add_dns_server_button" class="hiddenbutton settingrectfooterbutton">Add DNS server</button>
+      <button class="settingrectfooterbutton" id="set_dns_settings">Confirm</button>
+    </div>
+  </div>
+  <!-- DNS settings -->
+  <!-- ftp settings -->
+  <div class="settingrect ">
+    <div class="settingrectheader">
+      <h2>Ftp</h2>
+      <div class="checkbox-wrapper-2">
+        <input type="checkbox" class="sc-gJwTLC ikxBAC" id="ftpenable">
+      </div>
+    </div>
+    <div class="settingrectfooter">
+      <!-- <button>Add Ftp server</button> -->
+      <button class="settingrectfooterbutton" id="set_ftp_settings">Confirm</button>
+    </div>
+  </div>
+  <!-- ftp settings -->
+  <!-- ssh settings -->
+  <div class="settingrect ">
+    <div class="settingrectheader">
+      <h2>SSH</h2>
+      <div class="checkbox-wrapper-2">
+        <input type="checkbox" class="sc-gJwTLC ikxBAC" id="sshenable" (click)="togglesshbody()">
+      </div>
+    </div>
+    <div class="settingrectbody" id="sshsettingsbody" *ngIf="activeSshBody">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <label for="sshportinput" class="forminputlabel">Port</label>
+        <input type="text" id="sshportinput" class="forminput">
+      </div>
+      <table class="sshkeys">
+        <thead>
+        <tr><th>SSH keys</th></tr>
+        </thead>
+        <tbody id="sshkeystablebody">
+        </tbody>
+      </table>
+    </div>
+    <div class="settingrectfooter">
+      <button *ngIf="activeSshBody" id="add_ssh_key" class="hiddenbutton settingrectfooterbutton">Add SSH key</button>
+      <button class="settingrectfooterbutton" id="set_ssh_settings">Confirm</button>
+    </div>
+  </div>
+  <!-- ssh settings -->
+  <!-- Wi-Fi settings -->
+  <div class="settingrect ">
+    <div class="settingrectheader">
+      <h2>WIFI</h2>
+      <div class="checkbox-wrapper-2">
+        <input type="checkbox" class="sc-gJwTLC ikxBAC" id="wifistatus" (click)="togglewifibody()">
+      </div>
+    </div>
+    <div class="settingrectbody" id="wifisettingsbody" *ngIf="activeWifiBody">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <label for="SSID" class="forminputlabel">SSID</label>
+        <input type="text" id="SSID" class="forminput">
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <label for="wifipassword" class="forminputlabel">Old password</label>
+        <button id="showpasswordbutton">Show</button>
+        <input type="password" id="wifipassword" class="forminput">
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <label for="newwifipassword" class="forminputlabel">New password</label>
+        <button id="shownewpasswordbutton">Show</button>
+        <input type="password" id="newwifipassword" class="forminput">
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <label for="wifichannel" class="forminputlabel">WIFI channel</label>
+        <select id="wifichannel" class="forminput">
+          <option class="channeloption" value="1" style="color: black">1</option>
+          <option class="channeloption" value="6">6</option>
+          <option class="channeloption" value="11">11</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <label for="wifiqr" class="forminputlabel">Show qr code</label>
+        <div class="checkbox-wrapper-2">
+          <input type="checkbox" class="sc-gJwTLC ikxBAC" id="wifiqr">
+        </div>
+        <div id="wifiqrimg"></div>
+      </div>
+    </div>
+    <div class="settingrectfooter onebutton">
+      <button class="settingrectfooterbutton" id="setwifisettings">Confirm</button>
+    </div>
+  </div>
+  <!-- Wi-Fi settings -->
+</section>

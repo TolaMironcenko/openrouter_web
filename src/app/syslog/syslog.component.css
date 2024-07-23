@@ -1,0 +1,23 @@
+.syslogsection {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  pointer-events: all;
+  transition: 0.3s;
+  padding: 10px;
+}
+
+.syslogheader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.syslogdata {
+  width: 100%;
+  max-height: 85vh;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  overflow-y: auto;
+}

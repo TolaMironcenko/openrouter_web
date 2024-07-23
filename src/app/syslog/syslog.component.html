@@ -1,0 +1,10 @@
+<app-navbar></app-navbar>
+<section class="syslogsection">
+  <div class="syslogheader">
+    <h2 class="syslogheader">Syslog</h2>
+    <button id="openrouterfilter" (click)="getSyslogDataOpenrouterFilter()">openrouter</button>
+    <button id="authservicefilter" (click)="getSyslogDataAuthServiceFilter()">auth_service</button>
+    <button id="refreshbutton" (click)="getSyslogData()">&#8634;</button>
+  </div>
+  <div class="syslogdata" [innerHTML]="syslogdata"></div>
+</section>

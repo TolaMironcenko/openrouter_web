@@ -1,0 +1,14 @@
+<nav class="topbar">
+  <ul>
+    <li><a routerLink="/syslog" routerLinkActive="active" ariaCurrentWhenActive="page">Syslog</a></li>
+    <li><a routerLink="/settings" routerLinkActive="active" ariaCurrentWhenActive="page">Settings</a></li>
+    <li><a routerLink="/info" routerLinkActive="active" ariaCurrentWhenActive="page">Info</a></li>
+  </ul>
+  <h1>Openrouter Admin</h1>
+  <div class="userinfo">
+    <h2>username</h2>
+    <button (click)="logout()">Exit</button>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

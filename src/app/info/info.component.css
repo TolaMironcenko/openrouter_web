@@ -1,0 +1,11 @@
+.infosection {
+  max-width: max-content;
+  height: 100%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: gray;
+  display: grid;
+  grid-auto-rows: repeat(2, minmax(200px, 1fr));
+  grid-gap: 10px;
+}
