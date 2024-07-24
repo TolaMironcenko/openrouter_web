@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "../components/navbar/navbar.component";
 import {NgIf} from "@angular/common";
-import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-settings',
@@ -11,16 +10,14 @@ import {FormControl} from "@angular/forms";
   styleUrl: './settings.component.css'
 })
 export class SettingsComponent implements OnInit {
-  activeTelnetBody = false
   activeDnsBody = false
   activeSshBody = false
   activeWifiBody = false
-  // telnetcontrol = new FormControl()
   telnetenabled = false
   telnetport = ""
 
   toggletelnetbody() {
-    this.activeTelnetBody = !this.activeTelnetBody;
+    this.telnetenabled = !this.telnetenabled
   }
 
   togglednsbody() {
@@ -46,8 +43,20 @@ export class SettingsComponent implements OnInit {
       } else {
         this.telnetenabled = false
       }
-    }).catch((error) => {
+    }).catch(() => {
 
+    })
+  }
+
+  setTelnetEnabled() {
+    fetch([window.location.origin, 'api', 'settings', 'telnet', 'set'].join('/'), {
+      method: 'POST',
+      body: `{"token":"${localStorage.getItem("token")}","enabled":"${this.telnetenabled?1:0}"}`
+    }).then(res => res.json()).then(jsondata => {
+      if (jsondata.enabled === '1') {
+        this.telnetenabled = true
+      }
+    }).catch((error) => {
     })
   }
 
@@ -58,8 +67,24 @@ export class SettingsComponent implements OnInit {
     }).then(data => data.json()).then(jsondata => {
       this.telnetport = jsondata.port
     }).catch((error) => {
-      // notification(`Ошибка на сервере: ${error}`, "error")
     })
+  }
+
+  setTelnetPort() {
+    fetch([window.location.origin, 'api', 'settings', 'telnet', 'port', 'set'].join('/'), {
+      method: 'POST',
+      body: `{"token":"${localStorage.getItem("token")}","port":"${this.telnetport}"}`
+    }).then(data => data.json()).then(jsondata => {
+      this.telnetport = jsondata.port
+    }).catch((error) => {
+    })
+  }
+
+  setTelnetSettings() {
+    if (confirm("Confirm telnet settings?")) {
+      this.setTelnetEnabled()
+      this.setTelnetPort()
+    }
   }
 
   ngOnInit() {

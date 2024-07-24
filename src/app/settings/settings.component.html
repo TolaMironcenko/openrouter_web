@@ -8,7 +8,7 @@
         <input [checked]="telnetenabled" type="checkbox" class="sc-gJwTLC ikxBAC" id="telnetenable" (click)="toggletelnetbody()">
       </div>
     </div>
-    <div class="settingrectbody telnetsettingbody" *ngIf="activeTelnetBody">
+    <div class="settingrectbody telnetsettingbody" *ngIf="telnetenabled">
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <label for="telnetportinput" class="forminputlabel">Port</label>
         <input type="text" id="telnetportinput" class="forminput" [value]="telnetport">
@@ -16,7 +16,7 @@
     </div>
     <div class="settingrectfooter">
       <!-- <button class="settingrectfooterbutton hiddenbutton" id="add_telnet_user_button">Add telnet user</button> -->
-      <button class="settingrectfooterbutton" id="set_telnet_settings">Confirm</button>
+      <button class="settingrectfooterbutton" id="set_telnet_settings" (click)="setTelnetSettings()">Confirm</button>
     </div>
   </div>
   <!-- telnet settings -->

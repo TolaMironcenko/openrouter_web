@@ -1,4 +1,4 @@
-import { Routes, Router } from '@angular/router';
+import { Routes } from '@angular/router';
 import {InfoComponent} from "./info/info.component";
 import {SyslogComponent} from "./syslog/syslog.component";
 import {SettingsComponent} from "./settings/settings.component";
@@ -9,7 +9,6 @@ import {inject} from "@angular/core";
 
 function redirectifnotlogin() {
   let authservice = inject(AuthService)
-  let router = inject(Router);
   if (authservice.isLoggedIn()) {
     return '/info'
   }
