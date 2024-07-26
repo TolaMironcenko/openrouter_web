@@ -5,7 +5,7 @@
     <div class="settingrectheader">
       <h2>Telnet</h2>
       <div class="checkbox-wrapper-2">
-        <input [checked]="telnetenabled" type="checkbox" class="sc-gJwTLC ikxBAC" id="telnetenable" (click)="toggletelnetbody()">
+        <input [checked]="telnetenabled" type="checkbox" class="sc-gJwTLC ikxBAC" id="telnetenable" (click)="toggleTelnetEnabled()">
       </div>
     </div>
     <div class="settingrectbody telnetsettingbody" *ngIf="telnetenabled">
@@ -25,15 +25,21 @@
     <div class="settingrectheader">
       <h2>DNS</h2>
       <div class="checkbox-wrapper-2">
-        <input type="checkbox" class="sc-gJwTLC ikxBAC" id="dnsenable" (click)="togglednsbody()">
+        <input [checked]="dnsEnabled" type="checkbox" class="sc-gJwTLC ikxBAC" id="dnsenable" (click)="toggleDnsEnabled()">
       </div>
     </div>
-    <div class="settingrectbody" id="dnssettingsbody" *ngIf="activeDnsBody">
+    <div class="settingrectbody" id="dnssettingsbody" *ngIf="dnsEnabled">
       <table class="dnsservers">
         <thead>
         <tr><th>DNS servers</th></tr>
         </thead>
-        <tbody id="dnsserverstablebody">
+        <tbody id="dnsserverstablebody" *ngFor="let server of dnsServers">
+        <tr>
+          <th class="one">
+            {{server}}
+            <button class="deldnsserverbutton" id="server">Del</button>
+          </th>
+        </tr>
         </tbody>
       </table>
       <h3>Domains Table</h3>
@@ -50,9 +56,9 @@
       </table>
     </div>
     <div class="settingrectfooter">
-      <button *ngIf="activeDnsBody" id="add_local_domain_button" class="hiddenbutton settingrectfooterbutton">Add Local Domain</button>
-      <button *ngIf="activeDnsBody" id="add_dns_server_button" class="hiddenbutton settingrectfooterbutton">Add DNS server</button>
-      <button class="settingrectfooterbutton" id="set_dns_settings">Confirm</button>
+      <button *ngIf="dnsEnabled" id="add_local_domain_button" class="hiddenbutton settingrectfooterbutton">Add Local Domain</button>
+      <button *ngIf="dnsEnabled" id="add_dns_server_button" class="hiddenbutton settingrectfooterbutton">Add DNS server</button>
+      <button (click)="setDnsSettings()" class="settingrectfooterbutton" id="set_dns_settings">Confirm</button>
     </div>
   </div>
   <!-- DNS settings -->

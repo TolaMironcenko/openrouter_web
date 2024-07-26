@@ -1,27 +1,30 @@
 import {Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "../components/navbar/navbar.component";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [NavbarComponent, NgIf],
+  imports: [NavbarComponent, NgIf, NgForOf],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css'
 })
 export class SettingsComponent implements OnInit {
-  activeDnsBody = false
-  activeSshBody = false
-  activeWifiBody = false
-  telnetenabled = false
-  telnetport = ""
+  activeSshBody: boolean = false
+  activeWifiBody: boolean = false
 
-  toggletelnetbody() {
-    this.telnetenabled = !this.telnetenabled
+  telnetenabled: boolean = false
+  telnetport: string = ""
+
+  dnsEnabled: boolean = false
+  dnsServers: string[] = []
+
+  toggleTelnetEnabled(): void {
+    this.telnetenabled = !this.telnetenabled;
   }
 
-  togglednsbody() {
-    this.activeDnsBody = !this.activeDnsBody;
+  toggleDnsEnabled(): void {
+    this.dnsEnabled = !this.dnsEnabled;
   }
 
   togglesshbody() {
@@ -87,8 +90,54 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  getDnsEnabled(): void {
+    fetch([window.location.origin, 'api', 'settings', 'dns', 'get'].join('/'), {
+      method: 'POST',
+      body: `{"token":"${localStorage.getItem("token")}"}`
+    }).then(res => res.json()).then(jsondata => {
+      if (jsondata.enabled === '1') {
+        this.dnsEnabled = true
+        return;
+      } else {
+        this.dnsEnabled = false
+      }
+    }).catch((error) => {
+    })
+  }
+
+  setDnsEnabled(): void {
+    fetch([window.location.origin, 'api', 'settings', 'dns', 'set'].join('/'), {
+      method: 'POST',
+      body: `{"token":"${localStorage.getItem("token")}","enabled":"${this.dnsEnabled?1:0}"}`
+    }).then(res => res.json()).then(jsondata => {
+      if (jsondata.enabled === '1') {
+        this.dnsEnabled = true
+      }
+    }).catch((error) => {
+    })
+  }
+
+  getDnsServers(): void {
+    fetch([window.location.origin, 'api', 'settings', 'dns', 'servers', 'get'].join('/'), {
+      method: 'POST',
+      body: `{"token":"${localStorage.getItem("token")}"}`
+    }).then(res => res.json()).then(jsondata => {
+      this.dnsServers = jsondata.servers
+    }).catch((error) => {
+    })
+  }
+
+  setDnsSettings(): void {
+    if (confirm("Confirm DNS settings?")) {
+      this.setDnsEnabled();
+    }
+  }
+
   ngOnInit() {
     this.getTelnetEnabled()
     this.getTelnetPort()
+
+    this.getDnsEnabled()
+    this.getDnsServers()
   }
 }
